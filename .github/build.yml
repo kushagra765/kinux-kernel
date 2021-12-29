@@ -1,0 +1,44 @@
+name: GitHub CI
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+
+     - name: Cache Toolchain
+       uses: actions/cache@v2
+       env:
+         cache-name: cache-toolchain
+       with:
+         path: |
+           **/toolchain
+         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/build_toolchain.sh') }}
+         restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/build_toolchain.sh') }}
+
+     - name: Build Toolchain
+       run: |
+         cd ./toolchain/
+         chmod +x ./build_toolchain.sh
+         ./build_toolchain.sh
+
+     - name: Install Dependencies
+       run: |
+         chmod +x ./scripts/install_deps.sh
+         sh ./scripts/install_deps.sh
+     
+     - name: Build Kinux Kernel
+       run: |
+         make
+         
+     - name: Upload Build Artifact
+       uses: actions/upload-artifact@v2.2.3
+       with:
+         name: kinux-kernel-build.iso
+         path: kinux-kernel.iso
+         if-no-files-found: warn
