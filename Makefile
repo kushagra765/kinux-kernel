@@ -1,11 +1,11 @@
-CC = ./toolchain/compiler/bin/i686-elf-gcc
+CC = i686-elf-gcc
 LD = $(CC)
 AS = nasm
 KERNEL = kinux-kernel.elf
 ISO = kinux-kernel.iso
 
-INCLUDE = -Iinclude/ -Idrivers/
-CFLAGS = $(INCLUDE) -ffreestanding -Wno-discarded-qualifiers
+INCLUDE = -Iinclude/ -Idrivers/ -I$(PWD)
+CFLAGS = $(INCLUDE) -ffreestanding -Wno-discarded-qualifiers -Wno-attributes
 ASFLAGS = -f elf32
 LDFLAGS = -T link.ld -ffreestanding -O2 -nostdlib
 

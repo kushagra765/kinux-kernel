@@ -35,8 +35,7 @@ void console_clear() {
   for (int i = 0; i < 25; i++) {
     memsetw(text_ptr + i * 80, blank, 80);
   }
-  cur_y = 0;
-  cur_x = 0;
+  cur_y = cur_x = 0;
   console_move_cur();
 }
 

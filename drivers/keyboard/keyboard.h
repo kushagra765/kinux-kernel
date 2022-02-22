@@ -14,13 +14,11 @@
 
 #define RELEASED_MASK 0x80
 
-typedef uint8_t key_status_t;
-
 typedef struct keymap {
   uint8_t scancodes[128];
   uint8_t shift_scancodes[128];
   uint8_t control_map[8];
-  key_status_t controls;
+  uint8_t controls;
 } keymap_t;
 
 void init_keyboard();

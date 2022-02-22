@@ -26,6 +26,7 @@ multiboot:
 stublet:
      cli
      extern start_kernel
+     push ebx
      call start_kernel
      jmp $
      

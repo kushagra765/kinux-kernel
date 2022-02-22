@@ -5,6 +5,8 @@ phys = 0x00100000;
 SECTIONS
 {
   .text phys : AT(phys) {
+    . = ALIGN(8);
+    KEEP(*(.multiboot))
     code = .;
     *(.text)
     *(.rodata)
