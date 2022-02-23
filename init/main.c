@@ -33,6 +33,7 @@ void start_kernel(multiboot_info_t *mboot_info) {
   init_keyboard();
   uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
   init_tarfs(initrd);
+  tarfs_list_headers();
   console_write("Hello, World!\n");
   keyboard_idle();
 }
