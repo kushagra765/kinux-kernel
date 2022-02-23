@@ -1,4 +1,5 @@
 *.o
-*.bin
+*.elf
 *.iso
 isodir/
+include/generated/

@@ -1,6 +1,6 @@
-#include <stdint.h>
 #include <kinux/idt.h>
 #include <lib/string.h>
+#include <stdint.h>
 
 struct idt_entry {
   uint16_t lo_base;

@@ -1,8 +1,8 @@
 #ifndef _KINUX_PMM_H
 #define _KINUX_PMM_H
 
-#include <stdint.h>
 #include <init/multiboot.h>
+#include <stdint.h>
 
 #define PMM_STACK_ADDR 0xFF000000
 #define PMM_PAGE_SZ 4096

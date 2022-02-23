@@ -13,8 +13,7 @@ After the toolchain is built, run `make all` to build the kernel. After the kern
 - [x] Console
 - [x] Interrupts
 - [x] Keyboard driver
-- [ ] Paging
-- [ ] Kernel Heap
+- [x] PMM and VMM
 - [ ] VFS
 - [ ] Multitasking
 

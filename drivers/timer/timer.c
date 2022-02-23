@@ -1,6 +1,7 @@
-#include <kinux/timer.h>
-#include <kinux/ports.h>
 #include <kinux/irq.h>
+#include <kinux/ports.h>
+#include <kinux/printm.h>
+#include <kinux/timer.h>
 #include <stdint.h>
 
 int timer_ticks;
@@ -19,10 +20,13 @@ void timer_handler() {
 void timer_sleep(int ticks) {
   uint16_t eticks;
   eticks = timer_ticks + ticks;
-  while (timer_ticks < eticks);
+  while (timer_ticks < eticks)
+    ;
 }
 
-void init_timer() {
+void init_timer(int hz) {
   timer_ticks = 0;
   irq_install_handler(0, timer_handler);
+  timer_phase(hz);
+  printm("pit: initialized. hz=%d\n", hz);
 }

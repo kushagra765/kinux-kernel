@@ -1,12 +1,9 @@
+#include <kinux/idt.h>
 #include <kinux/irq.h>
 #include <kinux/isr.h>
-#include <kinux/idt.h>
 #include <kinux/ports.h>
 
-void *irq_routines[16] = {
-  0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0
-};
+void *irq_routines[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 void irq_install_handler(int n, void (*irq_handler)(struct registers *r)) {
   irq_routines[n] = irq_handler;
@@ -30,17 +27,17 @@ void irq_remap() {
 }
 
 void irq_handler(struct registers *r) {
-  void (*irq_handler)(struct registers *r);
+  void (*irq_handler)(struct registers * r);
   irq_handler = irq_routines[r->int_no - 32];
-  
+
   if (irq_handler) {
     irq_handler(r);
   }
-  
+
   if (r->int_no >= 40) {
     outb(0xA0, 0x20);
   }
-  
+
   outb(0x20, 0x20);
 }
 

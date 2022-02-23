@@ -1,8 +1,8 @@
 #include <kinux/panic.h>
-#include <kinux/console.h>
+#include <kinux/printm.h>
 
 void panic(const char *str) {
   __asm__ volatile("cli");
-  console_write("Kernel Panic: %s\n", str);
+  printm("Kernel panic - %s\n", str);
   __asm__ volatile("hlt");
 }

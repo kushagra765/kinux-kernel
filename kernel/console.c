@@ -1,8 +1,8 @@
 #include <kinux/console.h>
 #include <kinux/ports.h>
-#include <stdint.h>
-#include <lib/string.h>
 #include <lib/stdarg.h>
+#include <lib/string.h>
+#include <stdint.h>
 
 uint16_t *text_ptr;
 int attrib = 0x0F;
@@ -11,7 +11,7 @@ int cur_x = 0, cur_y = 0;
 void console_scroll() {
   unsigned blank, tmp;
   blank = 0x20 | (attrib << 8);
-  
+
   if (cur_y >= 25) {
     tmp = cur_y - 25 + 1;
     memcpy(text_ptr, text_ptr + tmp * 80, (25 - tmp) * 80 * 2);
@@ -42,7 +42,7 @@ void console_clear() {
 void console_putc(uint8_t c) {
   uint16_t *where;
   unsigned attr = attrib << 8;
-  
+
   if (c == 0x08 && cur_x != 0) {
     cur_x--;
   } else if (c == 0x09) {
@@ -57,12 +57,12 @@ void console_putc(uint8_t c) {
     *where = c | attr;
     cur_x++;
   }
-  
+
   if (cur_x >= 80) {
     cur_x = 0;
     cur_y++;
   }
-  
+
   console_scroll();
   console_move_cur();
 }
@@ -105,14 +105,14 @@ void console_write(const char *fmt, ...) {
 
 /* console_write_int() and console_write_hex()
  * are taken from JamesM's kernel development tutorials
- */ 
+ */
 void console_write_int(uint32_t num) {
   int a = num;
   int i = 0;
   char c[30];
 
   if (num == 0) {
-    console_write("0");
+    console_putc('0');
     return;
   }
 
