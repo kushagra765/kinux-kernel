@@ -1,4 +1,5 @@
 #!/bin/sh
 
-export PATH="./toolchain/compiler/bin:$PATH"
+# ........
+export PATH="/home/runner/work/kinux-kernel/toolchain/compiler/bin:$PATH"
 echo $PATH
