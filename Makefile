@@ -1,4 +1,4 @@
-CC = ./toolchain/compiler/bin/i686-elf-gcc
+CC = i686-elf-gcc
 LD = $(CC)
 AS = nasm
 KERNEL = kinux-kernel.elf
