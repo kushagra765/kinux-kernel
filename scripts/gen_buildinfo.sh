@@ -1,7 +1,7 @@
 #!/bin/sh
 
 VERSION="0.01"
-GCCVERSION=`i686-elf-gcc --version | grep ^i686-elf-gcc | sed 's/^.* //g'`
+GCCVERSION=`./toolchain/compiler/bin/i686-elf-gcc --version | grep ^i686-elf-gcc | sed 's/^.* //g'`
 
 mkdir -p include/generated/
 

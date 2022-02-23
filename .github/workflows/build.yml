@@ -34,8 +34,7 @@ jobs:
      
      - name: Build Kinux Kernel
        run: |
-         sh ./scripts/add_compiler_to_path.sh
-         make
+         make -j$(nproc)
          
      - name: Upload Build Artifact
        uses: actions/upload-artifact@v2.2.3
