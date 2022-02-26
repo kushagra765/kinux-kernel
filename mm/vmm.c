@@ -65,7 +65,7 @@ void page_fault(struct registers *r) {
     printm("present ");
     printm_dis_hdr = 1;
   }
-  if (rw && present) {
+  if (rw) {
     printm("read-only ");
   }
   if (user) {
