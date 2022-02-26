@@ -1,3 +1,4 @@
+#include <kinux/console.h>
 #include <kinux/pmm.h>
 #include <kinux/printm.h>
 #include <kinux/vmm.h>
@@ -17,7 +18,7 @@ void vmm_map(uint32_t va, uint32_t pa, uint32_t flags) {
 
   if (!page_directory[pt_idx]) {
     page_directory[pt_idx] = pmm_alloc_page() | PAGE_PRESENT | PAGE_WRITE;
-    memset(page_tables[pt_idx * 1024], 0, 0x1000);
+    memset(page_tables[pt_idx], 0, 0x1000);
   }
 
   page_tables[virt_page] = (pa & PAGE_MASK) | flags;
@@ -48,6 +49,34 @@ int vmm_get_mapping(uint32_t va, uint32_t *pa) {
     }
     return 1;
   }
+}
+
+void page_fault(struct registers *r) {
+  uint32_t faulting_addr;
+  __asm__ volatile("mov %%cr2, %0" : "=r"(faulting_addr));
+  int present = !(r->err_code & 0x1);
+  int rw = r->err_code & 0x2;
+  int user = r->err_code & 0x4;
+  int reserved = r->err_code & 0x8;
+  int id = r->err_code & 0x10;
+
+  printm("Page fault at 0x%x\n", faulting_addr);
+  if (present) {
+    printm("present ");
+    printm_dis_hdr = 1;
+  }
+  if (rw && present) {
+    printm("read-only ");
+  }
+  if (user) {
+    printm("user-mode ");
+  }
+  if (reserved) {
+    printm("reserved ");
+  }
+  console_putc('\n');
+  printm_dis_hdr = 0;
+  panic("Page fault\n");
 }
 
 void init_vmm() {

@@ -7,6 +7,7 @@
 #include <kinux/idt.h>
 #include <kinux/irq.h>
 #include <kinux/isr.h>
+#include <kinux/kheap.h>
 #include <kinux/pmm.h>
 #include <kinux/printm.h>
 #include <kinux/timer.h>
@@ -28,6 +29,7 @@ void start_kernel(multiboot_info_t *mboot_info) {
   init_pmm(mboot_info->mem_upper);
   init_vmm();
   pmm_free_available_pages(mboot_info);
+  init_kheap();
   __asm__ volatile("sti");
   init_timer(100);
   init_keyboard();

@@ -1,6 +1,7 @@
 #include <kinux/idt.h>
 #include <kinux/isr.h>
 #include <kinux/panic.h>
+#include <kinux/vmm.h>
 #include <stdint.h>
 
 const char *exceptions[] = {"Division by zero",
@@ -37,6 +38,10 @@ const char *exceptions[] = {"Division by zero",
                             "Reserved"};
 
 void isr_handler(struct registers *r) {
+  if (r->int_no == 14) {
+    page_fault(r);
+  }
+
   if (r->int_no <= 31) {
     panic(exceptions[r->int_no]);
   }
