@@ -3,6 +3,7 @@
 #include <generated/buildinfo.h>
 #include <keyboard/keyboard.h>
 #include <kinux/console.h>
+#include <kinux/cpuid.h>
 #include <kinux/gdt.h>
 #include <kinux/idt.h>
 #include <kinux/irq.h>
@@ -24,6 +25,7 @@ void start_kernel(multiboot_info_t *mboot_info) {
   init_isr();
   init_irq();
   printm("gdt, idt, isr and irq initialized\n");
+  cpuid_print_info();
   uint32_t total_mem = (mboot_info->mem_lower + mboot_info->mem_upper) / 1024;
   printm("Total memory %d MB\n", total_mem);
   init_pmm(mboot_info->mem_upper);
