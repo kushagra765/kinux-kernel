@@ -5,8 +5,6 @@
 
 struct tarfs_hdr *headers[32];
 int nr_files = 0;
-int found_init = 0;
-struct tarfs_hdr *init_hdr;
 
 unsigned int tarfs_getsize(const char *in) {
   unsigned int size = 0;
