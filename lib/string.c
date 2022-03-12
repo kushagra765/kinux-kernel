@@ -9,6 +9,24 @@ size_t strlen(const char *str) {
   return l;
 }
 
+char *strcpy(char *str1, const char *str2) {
+  char *rc = str1;
+
+  while ((*str1++ = *str2++)) {
+  }
+
+  return rc;
+}
+
+int strcmp(const char *str1, const char *str2) {
+  while ((*str1) && (*str1 == *str2)) {
+    ++str1;
+    ++str2;
+  }
+
+  return (*(unsigned char *)str1 - *(unsigned char *)str2);
+}
+
 unsigned short *memsetw(unsigned short *dest, unsigned short val,
                         size_t count) {
   unsigned short *tmp = (unsigned short *)dest;

@@ -12,6 +12,7 @@ struct tarfs_hdr {
   char mtime[12];
   char checksum[8];
   char typeflag[1];
+  unsigned int caddr;
 };
 
 unsigned int tarfs_getsize(const char *in);

@@ -1,9 +1,9 @@
 #include <kinux/console.h>
+#include <kinux/printm.h>
 #include <lib/stdarg.h>
 #include <lib/stdio.h>
 
 static char buf[1024];
-
 int printm_dis_hdr = 0;
 
 void printm(const char *fmt, ...) {

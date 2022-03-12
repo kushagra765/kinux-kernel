@@ -1,9 +1,12 @@
 #include "tarfs.h"
 #include <kinux/printm.h>
+#include <lib/string.h>
 #include <stdint.h>
 
 struct tarfs_hdr *headers[32];
 int nr_files = 0;
+int found_init = 0;
+struct tarfs_hdr *init_hdr;
 
 unsigned int tarfs_getsize(const char *in) {
   unsigned int size = 0;
@@ -30,6 +33,7 @@ unsigned int tarfs_parse(unsigned int addr) {
     unsigned int size = tarfs_getsize(header->size);
     headers[i] = header;
     addr += ((size / 512) + 1) * 512;
+    header->caddr = addr;
 
     if (size % 512) {
       addr += 512;
@@ -46,8 +50,10 @@ void tarfs_list_headers() {
     printm("tarfs: no files\n");
     return;
   }
+  char cbuf[256];
   for (int i = 0; i < nr_files; i++) {
-    printm("  %s\n", headers[i]->filename);
+    strcpy(cbuf, headers[i]->caddr);
+    printm("  %s content: %s\n", headers[i]->filename, cbuf);
   }
 }
 
