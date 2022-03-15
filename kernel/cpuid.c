@@ -24,6 +24,6 @@ void cpuid_print_info() {
   __cpuid(0x80000004, (uint32_t *)brand + 0x8, (uint32_t *)brand + 0x9,
           (uint32_t *)brand + 0xa, (uint32_t *)brand + 0xb);
 
-  printm("cpu0: %s", brand);
+  printm("cpu: %s\n", brand);
   console_putc('\n');
 }

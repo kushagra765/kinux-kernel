@@ -1,4 +1,5 @@
 #include "keyboard.h"
+#include <kinux/cmdline.h>
 #include <kinux/console.h>
 #include <kinux/irq.h>
 #include <kinux/ports.h>
@@ -163,6 +164,9 @@ void keyboard_idle() {
 }
 
 void init_keyboard() {
+  if (cmdline_opts[0] == 1) {
+    return;
+  }
   irq_install_handler(1, &keyboard_handler);
   current_layout = &us;
   kb_buf_start = 0;

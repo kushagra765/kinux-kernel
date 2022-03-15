@@ -2,6 +2,7 @@
 #include <fs/tarfs/tarfs.h>
 #include <generated/buildinfo.h>
 #include <keyboard/keyboard.h>
+#include <kinux/cmdline.h>
 #include <kinux/console.h>
 #include <kinux/cpuid.h>
 #include <kinux/gdt.h>
@@ -16,8 +17,7 @@
 
 void start_kernel(multiboot_info_t *mboot_info) {
   init_console();
-  printm(BUILD_INFO);
-  console_putc('\n');
+  printm("%s\n", BUILD_INFO);
   printm("console: %dx%d\n", mboot_info->framebuffer_width,
          mboot_info->framebuffer_height);
   init_gdt();
@@ -33,6 +33,7 @@ void start_kernel(multiboot_info_t *mboot_info) {
   pmm_free_available_pages(mboot_info);
   init_kheap();
   __asm__ volatile("sti");
+  cmdline_parse(mboot_info->cmdline);
   init_timer(100);
   init_keyboard();
   uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
