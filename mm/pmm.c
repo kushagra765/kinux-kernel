@@ -8,6 +8,7 @@ uint32_t pmm_stack_loc = PMM_STACK_ADDR;
 uint32_t pmm_stack_max = PMM_STACK_ADDR;
 uint32_t pmm_loc;
 int paging_active = 0;
+int pmm_init_done = 0;
 
 uint32_t pmm_alloc_page() {
   if (paging_active) {
@@ -38,6 +39,10 @@ void pmm_free_page(uint32_t page) {
 }
 
 void pmm_free_available_pages(multiboot_info_t *info) {
+  if (pmm_init_done) {
+    return;
+  }
+  pmm_init_done = 1;
   uint32_t i = info->mmap_addr;
   while (i < info->mmap_addr + info->mmap_length) {
     multiboot_memory_map_t *entry = (multiboot_memory_map_t *)i;
