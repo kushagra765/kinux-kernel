@@ -1,6 +1,7 @@
 *.o
 *.elf
 *.iso
+*.tar
 isodir/
 include/generated/
 toolchain/compiler/
