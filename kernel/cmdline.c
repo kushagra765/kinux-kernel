@@ -8,9 +8,9 @@ int cmdline_opts[CMDLINE_OPTS] = {0 /* Disable Keyboard */,
 int cmdline_parse(const char *cmdline) {
   printm("Kernel command line: %s\n", cmdline);
 
-  if (strstr(cmdline, "dis_kb") == 0) {
+  if (!strcmp(cmdline, "dis_kb")) {
     cmdline_opts[0] = 1;
-  } else if (strstr(cmdline, "dis_tarfs") == 0) {
+  } else if (!strcmp(cmdline, "dis_tarfs")) {
     cmdline_opts[1] = 1;
   }
 
