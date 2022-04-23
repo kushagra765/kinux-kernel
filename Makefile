@@ -12,7 +12,7 @@ ASFLAGS = -f elf32
 LDFLAGS = -T arch/$(ARCH)/link.ld -ffreestanding -O2 -nostdlib
 
 CFILES = $(shell find drivers/ fs/ init/ kernel/ lib/ mm/ -name '*.c')
-ASMFILES = $(shell find arch/$(ARCH)/boot/ kernel/ -name '*.asm')
+ASMFILES = $(shell find arch/$(ARCH)/ kernel/ -name '*.asm')
 OBJFILES = $(CFILES:.c=.o) $(ASMFILES:.asm=.o)
 
 $(ISO): $(KERNEL)
@@ -22,7 +22,7 @@ $(ISO): $(KERNEL)
 	@cp $(KERNEL) $(INITRD) isodir/boot/
 	@grub-mkrescue -o $(ISO) isodir
 
-$(KERNEL): arch/$(ARCH)/boot/boot.o $(OBJFILES)
+$(KERNEL): arch/$(ARCH)/boot.o $(OBJFILES)
 	@echo "LD $@"
 	@$(LD) $(LDFLAGS) $^ -o $@
 
