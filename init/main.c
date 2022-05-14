@@ -33,7 +33,7 @@ void start_kernel(multiboot_info_t *mboot_info) {
   pmm_free_available_pages(mboot_info);
   init_kheap();
   __asm__ volatile("sti");
-  cmdline_parse(mboot_info->cmdline);
+  cmdline_parse((const char *)mboot_info->cmdline);
   init_timer(100);
   init_keyboard();
   uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);

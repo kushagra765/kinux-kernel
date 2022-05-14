@@ -50,7 +50,7 @@ void tarfs_list_headers() {
   }
   char cbuf[256];
   for (int i = 0; i < nr_files; i++) {
-    strcpy(cbuf, headers[i]->caddr);
+    strcpy(cbuf, (const char *)headers[i]->caddr);
     printm("  %s content: %s\n", headers[i]->filename, cbuf);
   }
 }

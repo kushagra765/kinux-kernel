@@ -18,7 +18,7 @@ void vmm_map(uint32_t va, uint32_t pa, uint32_t flags) {
 
   if (!page_directory[pt_idx]) {
     page_directory[pt_idx] = pmm_alloc_page() | PAGE_PRESENT | PAGE_WRITE;
-    memset(page_tables[pt_idx], 0, 0x1000);
+    memset((void *)page_tables[pt_idx], 0, 0x1000);
   }
 
   page_tables[virt_page] = (pa & PAGE_MASK) | flags;
@@ -106,7 +106,7 @@ void init_vmm() {
 
   uint32_t pt_idx = PAGE_DIR_INDEX((PMM_STACK_ADDR >> 12));
   page_directory[pt_idx] = pmm_alloc_page() | PAGE_PRESENT | PAGE_WRITE;
-  memset(page_tables[pt_idx * 1024], 0, 0x1000);
+  memset((void *)page_tables[pt_idx * 1024], 0, 0x1000);
 
   paging_active = 1;
   printm("vmm: initialized\n");
