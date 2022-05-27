@@ -1,3 +1,6 @@
+VERSION = 0.01
+EXTRAVERSION =
+
 ARCH = i386
 CC = ./toolchain/compiler/bin/i686-elf-gcc
 LD = $(CC)
