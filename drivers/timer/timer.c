@@ -1,5 +1,5 @@
 #include <kinux/irq.h>
-#include <kinux/ports.h>
+#include <kinux/io.h>
 #include <kinux/printm.h>
 #include <kinux/timer.h>
 #include <stdint.h>

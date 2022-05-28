@@ -1,5 +1,5 @@
 #include <kinux/console.h>
-#include <kinux/ports.h>
+#include <kinux/io.h>
 #include <lib/stdarg.h>
 #include <lib/string.h>
 #include <stdint.h>

@@ -1,4 +1,4 @@
-#include <kinux/ports.h>
+#include <kinux/io.h>
 
 unsigned char inb(unsigned short port) {
   unsigned char rv;
