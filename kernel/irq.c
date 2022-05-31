@@ -1,7 +1,7 @@
 #include <kinux/idt.h>
+#include <kinux/io.h>
 #include <kinux/irq.h>
 #include <kinux/isr.h>
-#include <kinux/io.h>
 
 void *irq_routines[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 

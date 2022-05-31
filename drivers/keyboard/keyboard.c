@@ -1,8 +1,8 @@
 #include "keyboard.h"
 #include <kinux/cmdline.h>
 #include <kinux/console.h>
-#include <kinux/irq.h>
 #include <kinux/io.h>
+#include <kinux/irq.h>
 #include <kinux/printm.h>
 
 keymap_t us = {
