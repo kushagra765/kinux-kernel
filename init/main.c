@@ -6,6 +6,7 @@
 #include <kinux/console.h>
 #include <kinux/cpuid.h>
 #include <kinux/gdt.h>
+#include <kinux/ide.h>
 #include <kinux/idt.h>
 #include <kinux/irq.h>
 #include <kinux/isr.h>
@@ -39,6 +40,7 @@ void start_kernel(multiboot_info_t *mboot_info) {
   uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
   init_tarfs(initrd);
   tarfs_list_headers();
+  init_ide(0x1f0, 0x3f6, 0x170, 0x376, 0x000);
   console_write("Hello, World!\n");
   keyboard_idle();
 }
