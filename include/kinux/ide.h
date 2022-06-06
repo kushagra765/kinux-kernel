@@ -112,6 +112,14 @@ unsigned char ide_read(unsigned char channel, unsigned char reg);
 void ide_write(unsigned char channel, unsigned char reg, unsigned char data);
 void ide_read_buffer(uint8_t channel, uint8_t reg, uint32_t *buffer,
                      uint32_t quads);
+void ide_write_buffer(uint8_t channel, uint8_t reg, uint32_t *buffer,
+                      uint32_t quads);
+int ide_read_sectors(unsigned char drive, unsigned char numsects,
+                     unsigned int lba, uint32_t buf);
+int ide_write_sectors(unsigned char drive, unsigned char numsects,
+                      unsigned int lba, uint32_t buf);
+int ide_ata_access(unsigned char direction, unsigned char drive,
+                   unsigned int lba, unsigned char numsects, uint32_t buf);
 void init_ide(unsigned int bar0, unsigned int bar1, unsigned int bar2,
               unsigned int bar3, unsigned int bar4);
 
