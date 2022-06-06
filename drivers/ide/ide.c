@@ -1,3 +1,4 @@
+#include <kinux/console.h>
 #include <kinux/ide.h>
 #include <kinux/io.h>
 #include <kinux/printm.h>
@@ -524,25 +525,21 @@ void init_ide(unsigned int bar0, unsigned int bar1, unsigned int bar2,
 
   for (i = 0; i < 4; i++)
     if (devices[i].reserved == 1 && strlen(devices[i].model) > 0) {
-      printm("%d:-\n", i);
-      printm("  model: %s\n", devices[i].model);
-
-      printm("  type: ");
+      printm(" device %d:-\n", i);
+      printm("  model: %s, ", devices[i].model);
       printm_dis_hdr = 1;
+      printm("type: ");
       if (devices[i].type == IDE_ATA) {
-        printm("ATA\n");
+        printm("ATA, ");
       } else if (devices[i].type == IDE_ATAPI) {
-        printm("ATAPI\n");
+        printm("ATAPI, ");
       }
-      printm_dis_hdr = 0;
 
-      printm("  drive: %u, channel: %u\n", devices[i].drive,
-             devices[i].channel);
-      printm("  base: 0x%x, control: 0x%x\n", channels[i].base,
-             channels[i].ctrl);
-      printm("  size: %u sectors, %u bytes\n", devices[i].size,
+      printm("drive: %u, channel: %u, ", devices[i].drive, devices[i].channel);
+      printm("size: %u sectors, %u bytes\n", devices[i].size,
              devices[i].size * ATA_SECTOR_SIZE);
-      printm("  signature: 0x%x, features: %d\n", devices[i].sig,
-             devices[i].features);
+      printm_dis_hdr = 0;
     }
+
+  console_putc('\n');
 }

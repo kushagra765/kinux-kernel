@@ -2,6 +2,7 @@
 *.elf
 *.iso
 *.tar
+*.img
 isodir/
 include/generated/
 toolchain/compiler/

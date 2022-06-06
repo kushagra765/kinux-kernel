@@ -19,7 +19,7 @@ ASMFILES = $(shell find arch/$(ARCH)/ kernel/ -name '*.asm')
 OBJFILES = $(CFILES:.c=.o) $(ASMFILES:.asm=.o)
 
 $(ISO): $(KERNEL)
-	tar -zcvf $(INITRD) -C initrd/ .
+	@tar -zcvf $(INITRD) -C initrd/ .
 	@mkdir -p isodir/boot/grub
 	@cp grub.cfg isodir/boot/grub/
 	@cp $(KERNEL) $(INITRD) isodir/boot/
