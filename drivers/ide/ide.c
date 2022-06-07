@@ -485,7 +485,7 @@ void init_ide(unsigned int bar0, unsigned int bar1, unsigned int bar2,
         io_wait();
       }
 
-      ide_read_buffer(i, ATA_REG_DATA, (unsigned int *)ide_buf, 128);
+      ide_read_buffer(i, ATA_REG_DATA, (uint32_t *)ide_buf, 128);
       devices[count].reserved = 1;
       devices[count].type = type;
       devices[count].channel = i;
