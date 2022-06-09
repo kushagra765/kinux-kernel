@@ -1,7 +1,7 @@
 VERSION = 0.01
 EXTRAVERSION =
 
-ARCH = i386
+ARCH = x86
 CC = ./toolchain/compiler/bin/i686-elf-gcc
 LD = $(CC)
 AS = nasm
