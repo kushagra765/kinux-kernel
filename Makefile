@@ -39,7 +39,7 @@ $(KERNEL): arch/$(ARCH)/boot.o $(OBJFILES)
 	@$(AS) $(ASFLAGS) $< -o $@
 
 run:
-	@qemu-system-x86_64 $(ISO)
+	@qemu-system-x86_64 -serial stdio $(ISO)
 
 clean:
 	@rm -rf isodir $(ISO) $(KERNEL) $(INITRD) $(OBJFILES) include/generated/

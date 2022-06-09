@@ -13,6 +13,7 @@
 #include <kinux/kheap.h>
 #include <kinux/pmm.h>
 #include <kinux/printm.h>
+#include <kinux/serial.h>
 #include <kinux/timer.h>
 #include <kinux/vmm.h>
 
@@ -34,6 +35,7 @@ void start_kernel(multiboot_info_t *mboot_info) {
   pmm_free_available_pages(mboot_info);
   init_kheap();
   __asm__ volatile("sti");
+  init_serial();
   cmdline_parse((const char *)mboot_info->cmdline);
   init_timer(100);
   init_keyboard();
